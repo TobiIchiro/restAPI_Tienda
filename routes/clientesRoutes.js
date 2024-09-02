@@ -4,7 +4,7 @@ import {nuevoCliente,
     mostrarCliente,
     actualizarCliente,
     eliminarCliente
-} from '../controllers/clienteController.js'
+} from '../controllers/clientesController.js'
 
 const router = express.Router();
 
