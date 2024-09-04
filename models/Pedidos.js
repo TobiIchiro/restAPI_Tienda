@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import Productos from "./Productos";
 
 const Schema = mongoose.Schema;
 
@@ -8,7 +7,7 @@ const pedidosSchema = new Schema({
         type: Schema.ObjectId,
         ref : 'Clientes'
     },
-    productos: [{
+    pedido: [{
         producto: {
             type: Schema.ObjectId,
             ref: 'Productos'
