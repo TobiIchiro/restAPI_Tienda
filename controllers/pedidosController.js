@@ -27,7 +27,20 @@ const mostrarPedidos = async (req, res, next) => {
     }
 }
 
+const mostrarPedido = async (req,res, next) => {
+    try {
+        const pedido = await Pedidos.findById(req.params.idPedido).populate('cliente').populate({
+            path: 'pedido.producto',
+            model: 'Productos'
+        })
+        res.json(pedido)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export {
     nuevoPedido,
-    mostrarPedidos
+    mostrarPedidos,
+    mostrarPedido
 }
