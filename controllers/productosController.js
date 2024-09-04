@@ -1,9 +1,11 @@
 import Productos from '../models/Productos.js'
 
 const nuevoProducto = async(req, res, next) => {
-    console.log(req.body);
     const Producto = new Productos(req.body)
     try {
+        if(req.file.filename){
+            Producto.imagen = req.file.filename
+        }
         await Producto.save()
         res.json({mensaje : 'Se agregó un nuevo producto'})
     } catch (error) {

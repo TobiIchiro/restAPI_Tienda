@@ -5,11 +5,14 @@ import {nuevoProducto,
     actualizarProducto,
     eliminarProducto
 } from '../controllers/productosController.js'
+import subirArchivo from '../middleware/subirImagen.js';
 
 const router = express.Router();
 
 //Agregar producto
-router.post('/productos', nuevoProducto)
+router.post('/productos',
+    subirArchivo,
+    nuevoProducto)
 
 //Mostrar todos los productos
 router.get('/productos',mostrarProductos)
