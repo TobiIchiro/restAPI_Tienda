@@ -1,3 +1,4 @@
+import {unlink} from 'node:fs/promises'
 import Productos from '../models/Productos.js'
 
 const nuevoProducto = async(req, res, next) => {
@@ -41,10 +42,21 @@ const mostrarProducto = async(req, res, next) => {
 
 const actualizarProducto = async(req, res, next) => {
     try {
-        const producto = await Productos.findByIdAndUpdate({_id : req.params.idProducto}, 
-            req.body, {
-                new: true
-            })
+        const productoAnterior = await Productos.findById({_id : req.params.idProducto})
+        const nuevoProducto = req.body
+        if(req.file) {
+            nuevoProducto.imagen = req.file.filename
+            if(productoAnterior.imagen)
+                await unlink(`public/uploads/${productoAnterior.imagen}`)
+        }
+        else {
+            nuevoProducto.imagen = productoAnterior.imagen
+        }
+        const producto = await Productos.findByIdAndUpdate({_id : req.params.idProducto},
+            nuevoProducto, {
+                new :  true
+            }
+        )
         res.json(producto)
     }
     catch (error) {
@@ -55,6 +67,8 @@ const actualizarProducto = async(req, res, next) => {
 
 const eliminarProducto = async (req, res, next) => {
     try {
+        const producto = await Productos.findById({_id : req.params.idProducto})
+        await unlink(`public/uploads/${producto.imagen}`)
         await Productos.findOneAndDelete({_id : req.params.idProducto});
         res.json({mensaje : 'El producto se ha eliminado'})
     } catch (error) {

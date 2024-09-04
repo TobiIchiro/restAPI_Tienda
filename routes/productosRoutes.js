@@ -21,7 +21,9 @@ router.get('/productos',mostrarProductos)
 router.get('/productos/:idProducto',mostrarProducto)
 
 //Actualizar un producto
-router.put('/productos/:idProducto',actualizarProducto)
+router.put('/productos/:idProducto',
+    subirArchivo,
+    actualizarProducto)
 
 //Actualiza parcialmente un producto
 router.delete('/productos/:idProducto',eliminarProducto)
