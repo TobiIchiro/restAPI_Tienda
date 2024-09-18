@@ -2,6 +2,8 @@ import express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 
+import cors from 'cors'
+
 import clientesRoutes from './routes/clientesRoutes.js'
 import productosRoutes from './routes/productosRoutes.js'
 import pedidosRoutes from './routes/pedidosRoutes.js'
@@ -14,6 +16,8 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}))
+
+app.use(cors())
 
 app.use('/',clientesRoutes)
 app.use('/',productosRoutes)
