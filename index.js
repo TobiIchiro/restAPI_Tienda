@@ -23,4 +23,6 @@ app.use('/',clientesRoutes)
 app.use('/',productosRoutes)
 app.use('/',pedidosRoutes)
 
+app.use(express.static('public/uploads'));
+
 app.listen(5000);
