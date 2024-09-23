@@ -3,7 +3,8 @@ import {nuevoProducto,
     mostrarProductos,
     mostrarProducto,
     actualizarProducto,
-    eliminarProducto
+    eliminarProducto,
+    buscarProducto
 } from '../controllers/productosController.js'
 import subirArchivo from '../middleware/subirImagen.js';
 
@@ -27,5 +28,7 @@ router.put('/productos/:idProducto',
 
 //Actualiza parcialmente un producto
 router.delete('/productos/:idProducto',eliminarProducto)
+
+router.post('/productos/busqueda/:query',buscarProducto)
 
 export default router
